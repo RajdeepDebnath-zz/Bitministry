@@ -1,0 +1,178 @@
+﻿
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Sample Banking App</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Sample Banking App" />
+	<meta name="keywords" content="Deposit, Banking, Withdraw, Transfer, Money" />
+
+	<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<!-- Google Webfonts -->
+	<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="Theme/Blue/css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="Theme/Blue/css/icomoon.css">
+	<!-- Simple Line Icons-->
+	<link rel="stylesheet" href="Theme/Blue/css/simple-line-icons.css">
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="Theme/Blue/css/magnific-popup.css">
+	<!-- Owl Carousel -->
+	<link rel="stylesheet" href="Theme/Blue/css/owl.carousel.min.css">
+	<link rel="stylesheet" href="Theme/Blue/css/owl.theme.default.min.css">
+	<!-- Salvattore -->
+	<link rel="stylesheet" href="Theme/Blue/css/salvattore.css">
+	<!-- Theme Style -->
+	<link rel="stylesheet" href="Theme/Blue/css/style.css">
+	<!-- Modernizr JS -->
+	<script src="Scripts/modernizr-2.6.2.min.js"></script>
+    <script src="Scripts/angular.min.js"></script>
+    <script src="CustomScripts/accountController.js"></script>
+    <script src="Scripts/angular-route.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+
+	<div id="fh5co-page">
+		<div id="fh5co-wrap">
+			<header id="fh5co-hero" data-section="home" role="banner" style="background: url(Theme/Blue/images/bg_2.jpg) top left; background-size: cover;" >
+				<div class="fh5co-overlay"></div>
+				<div class="fh5co-intro">
+					<div class="container">
+                        <div class="row" ng-app="mainApp">
+                            <div ng-controller="bankAccountController" class="fh5co-counter-label">
+                                <h4> UserName : {{CurrentUserName}} </h4>
+                                <select ng-model="singleSelect" class="blackFont" ng-change="UserNameChangeEvent()"
+                                        ng-options="singleSelect.UserName for singleSelect in userNameList.availableOptions"></select>
+                                <br>
+                            </div>
+                            <div class="col-md-6 text-right fh5co-intro-img to-animate intro-animate-4">
+                                <div ng-view class="alighnLeft"></div>
+                                <script type="text/ng-template" id="deposit.htm">
+                                    <h2> Deposit </h2>
+                                    <br />
+                                    <div>Please enter amount:</div>
+                                    <div>
+                                        <input type="number" ng-model="amount" class="blackFont" />
+                                        <input type="button" value="Deposit" ng-click="DepositEvent()" class="blackFont" />
+                                    </div>
+                                    <div>
+                                        {{message}}
+                                    </div>
+                                </script>
+
+                            <script type="text/ng-template" id="checkBalance.htm">
+                                <h2> Check Balance </h2>
+                                <br />
+                                <p>Total Balance: {{balance}}</p>
+                            </script>
+
+                            <script type="text/ng-template" id="withdraw.htm">
+                                    <h2> Withdraw </h2>
+                                    <br />
+                                    <div>Please enter amount:</div>
+                                    <div>
+                                        <input type="number" ng-model="amount" class="blackFont" />
+                                        <input type="button" value="Withdraw" ng-click="WithdrawEvent()" class="blackFont" />
+                                    </div>
+                                    <div>
+                                        {{message}}
+                                    </div>
+                            </script>
+
+                            <script type="text/ng-template" id="transfer.htm">
+                                    <h2> Transfer </h2>
+                                    <br />
+                                    <div>Please select UserName: {{singleSelect.UserName}}</div>
+                                    <div>
+                                        <select ng-model="singleSelect" class="blackFont"
+                                        ng-options="singleSelect.UserName for singleSelect in userNameList.availableOptions"></select>
+                                    </div>
+                                    <br />
+                                    <div>Please enter amount:</div>
+                                    <div>
+                                        <input type="number" ng-model="amount" class="blackFont" />
+                                        <input type="button" value="Transfer" ng-click="TransferEvent()" class="blackFont" />
+                                    </div>
+                                    <div>
+                                        {{message}}
+                                    </div>
+                            </script>
+
+                            <script type="text/ng-template" id="statement.htm">
+                                <h2> Statement </h2>
+                                <table id="statementTable">
+                                    <thead>
+                                        <tr>
+                                            <td> Sl No </td>
+                                            <td> Amount </td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in statement">
+                                            <td>{{$index + 1}}</td>
+                                            <td>{{x.Amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </script>
+                        </div>
+							<div class="col-md-6 text-left fh5co-intro-img to-animate intro-animate-4">
+                                <p class="to-animate intro-animate-3"><a href="#deposit" class="btn btn-primary btn-md">Deposit</a></p>
+                                <p class="to-animate intro-animate-3"><a href="#checkBalance" class="btn btn-primary btn-md">Check Balance</a></p>
+                                <p class="to-animate intro-animate-3"><a href="#withdraw" class="btn btn-primary btn-md">Withdraw</a></p>
+                                <p class="to-animate intro-animate-3"><a href="#transfer" class="btn btn-primary btn-md">Transfer</a></p>
+                                <p class="to-animate intro-animate-3"><a href="#statement" class="btn btn-primary btn-md">Statement</a></p>
+                                
+							</div>
+                                
+						</div>
+					</div>						
+				</div>
+			</header>
+			
+		</div>
+
+		
+	</div>
+
+
+	<!-- jQuery -->
+	<script src="Scripts/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="Scripts/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="Scripts/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="Scripts/jquery.waypoints.min.js"></script>
+	<!-- Magnific Popup -->
+	<script src="Scripts/jquery.magnific-popup.min.js"></script>
+	<!-- Owl Carousel -->
+	<script src="Scripts/owl.carousel.min.js"></script>
+	<!-- toCount -->
+	<script src="Scripts/jquery.countTo.js"></script>
+	<!-- Main JS -->
+	<script src="Scripts/main.js"></script>
+    <script src="CustomScripts/BankAppRouter.js"></script>
+    <script src="CustomScripts/depositController.js"></script>
+    <script src="CustomScripts/checkBalanceController.js"></script>
+    <script src="CustomScripts/transferController.js"></script>
+    <script src="CustomScripts/statementController.js"></script>
+    <script src="CustomScripts/withdrawController.js"></script>
+    <script src="CustomScripts/BankAccountController.js"></script>
+	</body>
+</html>

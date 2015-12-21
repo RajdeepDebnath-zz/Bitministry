@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E648A1AD-8E39-440F-AB7B-7948529818E5}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RajdeepBankAppBLLLib</RootNamespace>
+    <AssemblyName>RajdeepBankAppBLLLib</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="TransactionBLL.cs" />
+    <Compile Include="BankAccontBLL.cs" />
+    <Compile Include="ITransactionBLL.cs" />
+    <Compile Include="IBankAccountBLL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BankAppIRepository\7 - BankAppIRepository.csproj">
+      <Project>{caa9dd09-c590-4f76-bcf9-5cd77f761f5b}</Project>
+      <Name>7 - BankAppIRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DomainObjects\2 - BankAppDomainObjects.csproj">
+      <Project>{f1bf1a2d-2912-48f1-96f0-922bc2cc14c4}</Project>
+      <Name>2 - BankAppDomainObjects</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MapperDomainToModel\4 - BankAppDomainObjectToModelMapper.csproj">
+      <Project>{440c7a98-cee5-4428-a3ef-cdc4252753b4}</Project>
+      <Name>4 - BankAppDomainObjectToModelMapper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RajdeepBankAppRepository\8 - BankAppEntityFrameworkRepository.csproj">
+      <Project>{165886f8-9a46-4bed-bd6d-d08673619db3}</Project>
+      <Name>8 - BankAppEntityFrameworkRepository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ViewModels\1 - BankAppViewModels.csproj">
+      <Project>{3e4187cb-feb9-4cea-91c2-f425de14d881}</Project>
+      <Name>1 - BankAppViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
