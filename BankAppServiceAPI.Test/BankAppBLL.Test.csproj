@@ -71,6 +71,10 @@
       <Project>{e648a1ad-8e39-440f-ab7b-7948529818e5}</Project>
       <Name>5 - BankAppBLLLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ViewModels\1 - BankAppViewModels.csproj">
+      <Project>{3e4187cb-feb9-4cea-91c2-f425de14d881}</Project>
+      <Name>1 - BankAppViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

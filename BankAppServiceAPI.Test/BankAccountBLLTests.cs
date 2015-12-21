@@ -4,6 +4,7 @@ using Moq;
 using DomainObjects;
 using System.Collections.Generic;
 using BankAppBLLLib;
+using BankAppModels;
 
 namespace BankAppBLL.Test
 {
@@ -11,13 +12,15 @@ namespace BankAppBLL.Test
     public class BankAccountBLLTests
     {
         private IBankAccountBLL _bankAccountBLL;
-        public BankAccountBLLTests()
-        {
-        }
         [TestMethod]
         public void GetAllUserNameTests()
         {
             //Arrange
+            var listBankAccountModel = new List<BankAccountModel>();
+            listBankAccountModel.Add(new BankAccountModel { UserName = "Raj" });
+            listBankAccountModel.Add(new BankAccountModel { UserName = "abc" });
+            listBankAccountModel.Add(new BankAccountModel { UserName = "xyz" });
+
             var listBankAccountDO = new List<BankAccountDO>();
             listBankAccountDO.Add(new BankAccountDO { UserName = "Raj" });
             listBankAccountDO.Add(new BankAccountDO { UserName = "abc" });
@@ -29,7 +32,9 @@ namespace BankAppBLL.Test
             _bankAccountBLL = new BankAccontBLL(mock.Object);
 
             //Assert
-            Assert.AreEqual(mock.Object.GetBankAccountDOs(), true);
+            Assert.AreEqual(_bankAccountBLL.GetAllBankAccounts().Count, 3);
+            Assert.AreNotEqual(_bankAccountBLL.GetAllBankAccounts(), null);
+            Assert.AreEqual(_bankAccountBLL.GetAllBankAccounts()[0].UserName, "Raj");
         }
     }
 }
